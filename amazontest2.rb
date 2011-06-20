@@ -1,7 +1,20 @@
 require 'rubygems'
 require 'asin'
 
-require 'ap'
+
+# Command line utility va.rb
+#
+# va "keyword", "keyword", "keyword"
+# e.g.
+# va shoes, macys, jcrew
+# would produce info for 10 products in the amazon catalog as follows
+# <productname1>, <price1>, <url_to_iamge1>
+# <productname2>, <price1>, <url_to_iamge1>
+# <productname3>, <price1>, <url_to_iamge1>
+# <productname4>, <price1>, <url_to_iamge1>
+# <productname5>, <price1>, <url_to_iamge1>
+# etc.
+
 
 ASIN::Configuration.configure do |config|
   config.key = 'AKIAI3Z2GRNRZLLG7L4A'
@@ -17,9 +30,12 @@ include ASIN
 #list = search_keywords("shoes", :SearchIndex => :Apparel)
 #list = search(:SearchIndex => :Apparel, :Keywords => "Shoes", :ResponseGroup => :Images)
 #list = search(:SearchIndex => :Apparel, :Brand => "Macys", :ResponseGroup => :ItemIds)
-list = search_keywords("shoes", {:SearchIndex => :Apparel, :ResponseGroup => :Medium })
+list = search_keywords("dresses", "formal", {:SearchIndex => :Apparel, :ResponseGroup => :Medium })
 #list = search(:SearchIndex => :Apparel, :Keywords => "Shoes", :ResponseGroup => :Medium)
+#puts list[0].raw.to_yaml
+puts
+# puts list[0].raw.ItemAttributes.Feature.to_yaml
+#puts list[0].raw.ItemAttributes.Brand
 
-
-list.each { |x| puts x.title, x.image_url }
+list.each { |x| puts "<<#{x.title}>> brand is: #{x.raw.ItemAttributes.Brand } (image #{x.image_url}\n" }
 
