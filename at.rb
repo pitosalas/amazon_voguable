@@ -13,19 +13,19 @@
   include ASIN
   if ARGV.length == 0
     puts "Run from command line as follows:"
-    puts "   ./at <brand>, <keyword>, <keyword> ..."
+    puts "   ./at <browsernode> <brand> \"<keyword>, <keyword>\""
     exit
   end
-  brand = ARGV[0]
-  keywords = ARGV[1, ARGV.length+1]
-  puts keywords, keywords.class
-  puts brand, brand.class
-  list = search :Brand => brand, :Keywords => keywords, :SearchIndex => :Apparel, :ResponseGroup => :Medium
+  browsernode = ARGV[0]
+  brand = ARGV[1]
+  keywords = ARGV[2]
+  list = search :BrowseNode => browsernode, :Brand => brand, :Keywords => keywords, :SearchIndex => :Apparel, :ResponseGroup => :Medium
 
+  puts "Searching for: BrowseNode: #{browsernode} brand: #{brand}, keywords: #{keywords.inspect}"
   counter = 0
   list.each {
     |item|
-      puts "Item: #{counter}, name: #{item.title}"
+      puts "Item: #{counter}, name: #{item.title}, price: #{item.raw.ItemAttributes.price}\nimage: #{item.image_url}"
       counter = counter + 1
       puts
   }

@@ -1,3 +1,5 @@
+#!/usr/bin/env ruby
+puts RUBY_VERSION
 require 'rubygems'
 require 'asin'
 
@@ -30,9 +32,9 @@ include ASIN
 #list = search_keywords("shoes", :SearchIndex => :Apparel)
 #list = search(:SearchIndex => :Apparel, :Keywords => "Shoes", :ResponseGroup => :Images)
 #list = search(:SearchIndex => :Apparel, :Brand => "Macys", :ResponseGroup => :ItemIds)
-list = search_keywords("dresses", "formal", {:SearchIndex => :Apparel, :ResponseGroup => :Medium })
-#list = search(:SearchIndex => :Apparel, :Keywords => "Shoes", :ResponseGroup => :Medium)
-#puts list[0].raw.to_yaml
+#list = search_keywords("red", "formal", {:SearchIndex => :Apparel, :ResponseGroup => :Medium })
+list = search(:BrowseNode => "1045024", :SearchIndex => :Apparel, :Keywords => "red", :ResponseGroup => :Medium)
+#puts list[0].raw.to_yaml"
 puts
 # puts list[0].raw.ItemAttributes.Feature.to_yaml
 #puts list[0].raw.ItemAttributes.Brand
