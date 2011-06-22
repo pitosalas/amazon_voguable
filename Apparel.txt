@@ -1,0 +1,30 @@
+1045024
+D, [2011-06-22T10:43:17.671206 #34444] DEBUG -- : HTTPI executes HTTP GET using the net_http adapter
+Searching for: BrowseNode: Dresses, brand: , keywords: 
+Item: 1, name: Twelfth St. By Cynthia Vincent Womens Shirred Corset Maxi Dress, price: 
+image: http://ecx.images-amazon.com/images/I/41FE97tiL1L.jpg
+-----
+Item: 2, name: As U Wish Juniors Halter Long Dress, price: 
+image: http://ecx.images-amazon.com/images/I/41ZrPiIKkLL.jpg
+-----
+Item: 3, name: Ella moss Women's Liberty One Shoulder Dress, price: 
+image: http://ecx.images-amazon.com/images/I/41NDMAcp%2BeL.jpg
+-----
+Item: 4, name: bebe Asymmetric Pintucked Dress, price: 
+image: http://ecx.images-amazon.com/images/I/41DRpxmvU1L.jpg
+-----
+Item: 5, name: Calvin Klein Jeans Women's Short Tank Dress, price: 
+image: http://ecx.images-amazon.com/images/I/41PMrzqAsrL.jpg
+-----
+Item: 6, name: Trina Turk Women's Biscayne Dress, price: 
+image: http://ecx.images-amazon.com/images/I/31C0rMa9rZL.jpg
+-----
+Item: 7, name: bebe Back Cutout Mini Bodycon Dress, price: 
+image: http://ecx.images-amazon.com/images/I/419d2YaSxBL.jpg
+-----
+Item: 8, name: Laundry by Shelli Segal Women's Butterfly Print Dress, price: 
+image: http://ecx.images-amazon.com/images/I/51HqrtSkF7L.jpg
+-----
+Item: 9, name: Xoxo Juniors Printed Belted Maxi Dress, price: 
+image: http://ecx.images-amazon.com/images/I/41i7IK5%2B5rL.jpg
+-----
