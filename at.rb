@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
   require 'rubygems'
   require 'asin'
+  require 'pp'
   
   include ASIN
   
@@ -105,7 +106,7 @@ h["Wedding & Engagement Rings"]=16014541
   keywords = ARGV[2]
 
 	if h.has_key?(browsenode.capitalize)	
-	list = search(:BrowseNode => h[browsenode.capitalize], :SearchIndex => :Apparel, :Keywords => keywords, :ResponseGroup => :Medium)
+	list = search(:BrowseNode => h[browsenode.capitalize], :Brand => brand, :SearchIndex => :Apparel, :Keywords => keywords, :ResponseGroup => :Large)
   	puts "Searching for: BrowseNode: #{browsenode.capitalize}, brand: #{brand}, keywords: #{keywords}"
   
    
@@ -113,19 +114,25 @@ h["Wedding & Engagement Rings"]=16014541
    puts "Ooops! Please check your browse node and try again.."
    check_input
   end
+#  pp list[0]
 
 
   
-  
-  counter = 1
-  list.each {
+#  puts list[0].raw.ItemAttributes.Feature
+#  puts list[0].raw.ItemAttributes.Title
+#  puts list[0].raw.ItemAttributes.FabricType
+ 
+   counter = 1
+   list.each {
    |item|
-       puts "Item: #{counter}, name: #{item.title}, price: #{item.raw.ItemAttributes.price}\nimage: #{item.image_url}"
+      puts "Asin: #{item.asin} Item: #{counter}, name: #{item.title}, price: #{item.raw.ItemAttributes.price}\nimage: #{item.image_url}"
+      attribs = item.raw.ItemAttributes
+      tagfake = attribs.Feature + [attribs.Title] + [attribs.FabricType]
+      puts ">>> Brand: #{attribs.Brand}"
       counter = counter + 1
       puts "-----"
-  }
-  
-  
+  } unless list.ni
+
 
 
 
