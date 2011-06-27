@@ -101,7 +101,7 @@ h["Wedding & Engagement Rings"]=16014541
   check_input
   
   browsenode = ARGV[0]
-  puts h[browsenode.capitalize]
+#  puts h[browsenode.capitalize]
   brand = ARGV[1]
   keywords = ARGV[2]
 
@@ -123,6 +123,7 @@ h["Wedding & Engagement Rings"]=16014541
 #  puts list[0].raw.ItemAttributes.FabricType
  
    counter = 1
+   puts "Outputting #{list.length} items"
    list.each {
    |item|
       puts "Asin: #{item.asin} Item: #{counter}, name: #{item.title}, price: #{item.raw.ItemAttributes.price}\nimage: #{item.image_url}"
