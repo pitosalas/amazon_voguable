@@ -161,11 +161,6 @@ pp list[0].raw.ItemAttributes.ListPrice.Amount
     file.close
 end
 
-#Theme.create(:id => 1, :name=>'Lite', :background_color=>'0xC7FFD5', :title_text_color=>'0x222222',
-#                      :component_theme_color=>'0x001277', :carrier_select_color=>'0x7683FF', :label_text_color=>'0x000000',
-##                      :join_upper_gradient=>'0x6FAEFF', :join_lower_gradient=>'0x000000', :join_text_color=>'0xFFFFFF',
-#                      :cancel_link_color=>'0x001277', :border_color=>'0x888888', :carrier_text_color=>'0x000000', :public => true)
-
   def esc(str)
     str.sub( "'", %q{\\\'} ) unless str.nil?
   end
