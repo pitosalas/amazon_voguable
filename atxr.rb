@@ -311,6 +311,7 @@ puts "Outputting #{list5.length} items"
       end
       end
 
+<<<<<<< HEAD
                 if list5.length>0
        list5.each do |item|
      		file.puts ("Item.create(")
@@ -335,6 +336,11 @@ puts "Outputting #{list5.length} items"
       end
       end
 
+=======
+  def esc(str)
+    str.sub( "'", %q{\\\'} ) unless str.nil?
+  end
+>>>>>>> 162ce9170237d1690b5a10ba2ec217ab29ebfeaa
 
 
 #============
