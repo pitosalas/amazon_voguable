@@ -105,15 +105,18 @@ h["Wedding & Engagement Rings"]=16014541
   brand = ARGV[1]
   keywords = ARGV[2]
 
-  if h.has_key?(browsenode.capitalize)  
-  list = search(:BrowseNode => h[browsenode.capitalize], :Brand => brand, :SearchIndex => :Apparel, :Keywords => keywords, :ResponseGroup => :Large)
-    puts "Searching for: BrowseNode: #{browsenode.capitalize}, brand: #{brand}, keywords: #{keywords}"
-  
-   
-   else
-   puts "Ooops! Please check your browse node and try again.."
-   check_input
+ # if h.has_key?(browsenode.capitalize)  
+  list = search(:BrowseNode => 1040660, :Brand => brand, :SearchIndex => :Apparel, :Keywords => "pants", :ResponseGroup => :Large)
+    puts "Searching for: BrowseNode: Intimates, brand: #{brand}, keywords: #{keywords}"
+  def esc(str)
+    str.sub( "'", %q{\\\'} ) unless str.nil?
   end
+
+   
+  #  else
+#    puts "Ooops! Please check your browse node and try again.."
+#    check_input
+#  # end
 #  pp list[0]
 
 
@@ -122,41 +125,55 @@ h["Wedding & Engagement Rings"]=16014541
 #  puts list[0].raw.ItemAttributes.Title
 #  puts list[0].raw.ItemAttributes.FabricType
  
-   counter = 1
    puts "Outputting #{list.length} items"
-   list.each {
-   |item|
-      puts "Asin: #{item.asin} Item: #{counter}, name: #{item.title}, price: #{item.raw.ItemAttributes.price}\nimage: #{item.image_url}"
-      attribs = item.raw.ItemAttributes
-      tagfake = attribs.Feature + [attribs.Title] + [attribs.FabricType]
-      puts ">>> Brand: #{attribs.Brand}"
-      counter = counter + 1
-      puts "-----"
-  } unless true # list.nil
-  
-# Create or append to the output file
-  file = File.new("items.xml", "a")
+    
+  file = File.new("items.rb", "a")
   list.each do |item|
-    file.puts "<item>"
-    file.puts "   <asin>#{item.asin}</asin>"
-    file.puts "   <title>#{item.title}</title>"
-    file.puts "   <price>#{item.raw.ItemAttributes.Price}</price>"
-    file.puts "   <image_url>#{item.image_url}</image_url>"
+     		file.puts ("Item.create(")
+    	 	file.puts (" : description=> '\',")
+     	  	file.puts (" :name => \'#{esc(item.title)}\',")
+     	  	file.puts (" :img_url => \'#{esc(item.image_url)}\',")
+       		file.puts (" :category => \'14333511\',")
+	  				i_attrs = item.raw.ItemAttributes
+          			features = i_attrs.Feature
+      						features = [features] if features.class != Array
+      		file.print (" :features => \'")
+      					features.each do|feature|
+        						 file.print "#{esc(feature)}\n"
+       					end unless i_attrs.Feature.nil?
+      		file.puts ("\',")
+      					listprice = i_attrs.ListPrice
+      		file.puts (" :item_price => \'#{listprice.FormattedPrice}\',") unless listprice.nil?
+      		file.puts (" :brand => \'#{esc(i_attrs.Brand)}\',")
+      		file.puts (" :link_to_buy=> \'#{esc(item.raw.DetailPageURL)}\',")
+      		file.puts (" :fabric => \'#{esc(i_attrs.FabricType)}\'")
+      		file.puts (")")
+      end
 
-    i_attrs = item.raw.ItemAttributes
-    file.puts "   <brand>#{i_attrs.Brand}</brand>"
-    file.puts "   <feature_list>"
-    features = i_attrs.Feature
-    features = [features] if features.class != Array
-    features.each do
-       |feature|
-       file.puts "       <feature>#{feature}</feature>"
-     end unless i_attrs.Feature.nil?
-    file.puts "   </feature_list>"
-    file.puts "   <fabric_type>#{i_attrs.FabricType}</fabric_type>"
-    file.puts "</item>"
-  end unless list.nil?
-  file.close
+  
+# # Create or append to the output file
+#   file = File.new("items.rb", "a")
+#   list.each do |item|
+#     file.puts "<item>"
+#     file.puts "   <asin>#{item.asin}</asin>"
+#     file.puts "   <title>#{item.title}</title>"
+#     file.puts "   <price>#{item.raw.ItemAttributes.Price}</price>"
+#     file.puts "   <image_url>#{item.image_url}</image_url>"
+# 
+#     i_attrs = item.raw.ItemAttributes
+#     file.puts "   <brand>#{i_attrs.Brand}</brand>"
+#     file.puts "   <feature_list>"
+#     features = i_attrs.Feature
+#     features = [features] if features.class != Array
+#     features.each do
+#        |feature|
+#        file.puts "       <feature>#{feature}</feature>"
+#      end unless i_attrs.Feature.nil?
+#     file.puts "   </feature_list>"
+#     file.puts "   <fabric_type>#{i_attrs.FabricType}</fabric_type>"
+#     file.puts "</item>"
+#   end unless list.nil?
+#   file.close
 
 
 
